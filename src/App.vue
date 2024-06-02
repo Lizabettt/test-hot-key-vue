@@ -1,30 +1,45 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <div class="app">
+        <user-form 
+        @create="createUser"/>
+        <div>
+        </div>
+        <user-list 
+        :users="users" 
+        @del="delUser" />
+
+    </div>
+
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import UserForm from '@/components/UserForm';
+import UserList from '@/components/UserList';
+export default {
+    components: {
+        UserList,
+        UserForm,
+    },
+    data() {
+        return {
+            users: [
+                { id: 1, name: 'ggg', date: '111' },
+                { id: 2, name: 'ggg2', date: '1118' },
+                { id: 3, name: 'ggg5', date: '1117' },
+            ],
+        }
+    },
+    methods: {
+        //добавление контакта
+        createUser(user) { //принимает нового созданного контакта
+            console.log(user);
+            this.users.push(user)//пушу в массив
+        },
+        //удаление контакта
+        delUser(user) {
+            this.users = this.users.filter(p => p.id !== user.id)
+        }
+    },
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
+<style></style>
