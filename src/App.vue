@@ -1,12 +1,10 @@
 <template>
     <div class="app">
-        <user-form 
-        @create="createUser"/>
+        <my-button @click="getUsers">Получить список контактов</my-button>
+        <user-form @create="createUser" />
         <div>
         </div>
-        <user-list 
-        :users="users" 
-        @del="delUser" />
+        <user-list :users="users" @del="delUser" />
 
     </div>
 
@@ -14,21 +12,24 @@
 <script>
 import UserForm from '@/components/UserForm';
 import UserList from '@/components/UserList';
+import usersArr from '@/components/UsersArray.js';
+
+
+
 export default {
     components: {
         UserList,
         UserForm,
+
     },
+
     data() {
         return {
-            users: [
-                { id: 1, name: 'ggg', date: '111' },
-                { id: 2, name: 'ggg2', date: '1118' },
-                { id: 3, name: 'ggg5', date: '1117' },
-            ],
-        }
+            users: usersArr
+             }
     },
     methods: {
+
         //добавление контакта
         createUser(user) { //принимает нового созданного контакта
             console.log(user);
